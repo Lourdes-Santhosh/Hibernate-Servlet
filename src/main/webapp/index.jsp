@@ -18,6 +18,15 @@
 				<div class="card">
 					<div class="card-header text-centre fs-3">Employee
 						Registration Form</div>
+						<%
+							String msg = (String)session.getAttribute("msg");
+							if(msg != null) {
+								%>
+									<p class = "text-center fs-4 text-success"> <%= msg %> </p>
+								<%
+							}
+							session.removeAttribute(msg);
+						%>
 					<div class="card-body">
 						<form method = "post" action = "register">
 							<div class="mb-3">

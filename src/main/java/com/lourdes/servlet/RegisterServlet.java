@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lourdes.conn.HibernateUtil;
 import com.lourdes.dao.EmpDao;
@@ -29,12 +30,17 @@ public class RegisterServlet extends HttpServlet {
 		EmpDao dao = new EmpDao(HibernateUtil.getSessionFactory());
 		boolean isInserted = dao.saveEmp(emp);
 		
+		HttpSession session = req.getSession();
+		
 		if(isInserted) {
+			session.setAttribute("msg", "Emp Registered Successfully");
 			System.out.println("Inserted Successfully");
 		} else {
+			session.setAttribute("msg", "Emp Not Registered");
 			System.out.println("Not Inserted");
 		}
 		
+		resp.sendRedirect("index.jsp");
 	}
 	
 	
